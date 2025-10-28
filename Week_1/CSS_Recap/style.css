@@ -1,0 +1,47 @@
+body{
+    background-color: #574a3f;
+    background: linear-gradient(#553c27, #665445);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/*Image*/
+#imgOfRDR2{
+    border-radius: 10px 10px 10px 10px;
+    border-style: solid;
+}
+
+p{
+    font-size: medium;
+}
+
+/*Link to W3School*/
+#linkToW3{
+    color: rgb(240, 232, 232);
+    text-decoration: none;
+    
+}
+
+#linkToW3:hover{
+    text-decoration: underline
+}
+
+
+/*Table*/
+/*All rows except second will use this*/
+.defaultRow{
+    background-color: rgb(191, 149, 95);
+    border-radius: 10px 10px 10px 10px;
+    border-style: solid;
+}
+/*Second row style*/
+.tableSecondRow{
+    background-color: gainsboro;
+    border-radius: 10px 10px 10px 10px;
+    border-style: dashed;
+}
+
+
+.list{
+    list-style-type: square;
+}
