@@ -9,6 +9,8 @@ body{
 #imgOfRDR2{
     border-radius: 10px 10px 10px 10px;
     border-style: solid;
+    display: block;
+    margin-top: 1rem;
 }
 
 p{
@@ -19,6 +21,8 @@ p{
 #linkToW3{
     color: rgb(240, 232, 232);
     text-decoration: none;
+    display: block;
+    margin-bottom: 1rem;
     
 }
 
@@ -28,6 +32,11 @@ p{
 
 
 /*Table*/
+
+#table{
+    width: 25%;
+}
+
 /*All rows except second will use this*/
 .defaultRow{
     background-color: rgb(191, 149, 95);
