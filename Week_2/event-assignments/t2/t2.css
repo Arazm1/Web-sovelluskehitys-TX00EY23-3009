@@ -1,0 +1,43 @@
+body {
+  background-color: #f0f0f0;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+}
+
+th {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  font-weight: normal;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+
+/*Modal*/
+dialog {
+  border: black;
+  border-style: solid;
+  border-radius: 8x 8px 8px 8px;
+  background: linear-gradient(#275551, #455b66);
+
+}
+
+
+.highlight{
+  background: linear-gradient(#236c66, #235d7b);
+  font-weight: bold;
+
+}
