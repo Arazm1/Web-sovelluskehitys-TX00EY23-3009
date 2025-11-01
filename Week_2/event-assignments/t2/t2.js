@@ -797,12 +797,12 @@ restaurants.forEach(r =>{
 
     tr.classList.add('highlight');
 
-    restaurantName = r.name;
-    restaurantAddress = r.address;
-    restaurantPostalCode = r.postalCode;
-    restaurantCity = r.city;
-    restaurantPhoneNumber = r.phone;
-    restaurantCompany = r.company;
+    const restaurantName = r.name;
+    const restaurantAddress = r.address;
+    const restaurantPostalCode = r.postalCode;
+    const restaurantCity = r.city;
+    const restaurantPhoneNumber = r.phone;
+    const restaurantCompany = r.company;
 
 
     dialog.innerHTML = 

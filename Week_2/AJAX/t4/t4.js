@@ -1,52 +1,44 @@
-const fetchData = async(url, options) => {
-  let returnResponse;
-  try {
-    const response = await fetch(url, options);
+// task 4 - generic fetch function
 
+const baseURL = 'https://reqres.in/api/';
+
+const fetchData = async (endPointUrl, options = {}) => {
+  try {
+    const response = await fetch(baseURL + endPointUrl, options);
     if (!response.ok) {
-      let errorMessage = `HTTP error ${response.status}`;
-
-      try {
-        const errorData = await response.json();
-        if (errorData.error) {
-          errorMessage = errorData.error;
-        }
-      } catch {
-        //
-      }
-      returnResponse = errorMessage;
-    } else{
-        const data = await response.json();
-        returnResponse = data;
+      throw new Error('Response not ok');
     }
-
-    
+    const result = await response.json();
+    return result;
   } catch (error) {
-    returnResponse = error;
+    console.error('get failed', error);
+    throw new Error(error);
   }
+};
 
-  return returnResponse;
+// käytetään fetchData-funktiota myös pääohjelmassa virheenkäsittely hyödyntäen
+const user = {
+  name: 'John Doe',
+  job: 'Developer',
+};
+const options = {
+  method: 'POST',
+  headers: {
+    'x-api-key': 'reqres-free-v1',
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify(user),
+};
+try {
+  const responseData = await fetchData('users', options);
+  console.log('response', responseData);
+} catch (error) {
+  // oikeassa elämässä tässä kerrotaan käyttäjälle, mitä tapahtui
+  // esim. käyttöliittymän domia päivittämällä
+  console.error('Virhe napattu kii:', error);
 }
 
-async function Main() {
-  try {
-    const user = {
-      name: 'John Doe',
-      job: 'Developer',
-    };
-    const url = 'https://reqres.in/api/users';
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    };
-    const userData = await fetchData(url, options);
-    console.log(userData);
-  } catch (error) {
-    console.error('An error occurred:', error);
-  }
-}
+// pyyntö ilman virheenkäsittelyä
+//console.log(await fetchData('users/2'));
 
-Main();
+
