@@ -772,6 +772,91 @@ const restaurants = [
 
 // your code here
 
+//1. User location
+//2. Calculate and add distance
+// Sort the list
+
+
+const userLoc = document.getElementById('userLoc');
+const results = document.querySelector('table');
+
+const calculateDistance = (lon1, lat1, lon2, lat2) => {
+  return Math.sqrt((lon2 - lon1) ** 2 + (lat2 -lat1) ** 2) *111;
+};
+
+
+const renderUI = (array) => {
+  array.forEach((e) => {
+    let tr = document.createElement('tr');
+    let trInner = 
+      `
+      <td>${e.name}</td><td>${e.address}</td><td>~nbsp;${e.distance.toFixed(1)}km</td>
+      `;
+      tr.innerHTML = trInner;
+      results.appendChild(tr);
+  });
+};
+
+const proceedWithLocation = (userLat, userLon) => {
+  // filter, map ja sort olisi hyvä
+  // jatkossa pistää omiin funktioihin, niitä käytetään usein
+
+  // FILTER metodia käytetään luomaan uusi taulukko, joka sisältää
+  // vain ne alkuperäiset taulukon alkiot jotka täyttävät ehdon
+  // Yksinkertainen esimerkki
+  //const clean = restaurants.filter((r) => r.location);
+
+  const clean = restaurants.filter(
+    (r) => r?.location?.coordinates?.length === 2
+  );
+
+
+  const restaurantWithDistance = clean.map((r) => {
+    //Search for every restaurant lat and lon
+    const [lon, lat] = r.location.coordinates;
+    //calc the distance
+    let distance = calculateDistance(userLon, userLat, lon, lat);
+    return {...r, distance};
+  });
+
+  restaurantWithDistance.sort((a, b) => a.distance - b.distance);
+
+  console.log(restaurantWithDistance);
+  renderUI(restaurantWithDistance);
+
+};
+
+const onSuccess = (pos) => {
+  console.log('Onnistui');
+  lat = pos.coords.latitude;
+  lon = pos.coords.longitude;
+  userLoc.textContent = `Your location: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+  proceedWithLocation(lat, lon);
+};
+
+const onError = () => {
+  console.log("Virhe");
+  //Helsinki centrum
+  let lat = 60.1699;
+  let lon = 24.9384;
+  userLoc.textContent = `Error getting user location. Helsinki will be used as default`;
+  proceedWithLocation(lat, lon);
+};
+
+const init = () => {
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }
+  else{
+    userLoc.innerHTML = `Geolocation not supported on this browser!`;
+    onError();
+  }
+};
+
+init();
+
+
+
 const options = {
   enableHighAccuracy: true,
   timeout: 5000,
