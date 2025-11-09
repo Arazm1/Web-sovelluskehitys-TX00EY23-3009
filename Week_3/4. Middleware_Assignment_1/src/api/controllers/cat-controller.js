@@ -1,0 +1,52 @@
+import {addCat, findCatById, listAllCats} from "../models/cat-model.js";
+
+const getCat = (req, res) => {
+  res.json(listAllCats());
+};
+
+const getCatById = (req, res) => {
+  const cat = findCatById(req.params.id);
+  if (cat) {
+    res.json(cat);
+  } else {
+    res.sendStatus(404);
+  }
+};
+
+const postCat = (req, res) => {
+
+  console.log('Form data:', req.body);
+  console.log('File data:', req.file);
+
+  console.log('--- Incoming POST /cats ---');
+  console.log('Headers:', req.headers['content-type']);
+  console.log('req.body:', req.body);
+  console.log('req.file:', req.file);
+
+
+  const catData = {
+    ...req.body, filename: req.file ? req.file.filename : null,
+  };
+
+  const result = addCat(catData);
+  if (result.cat_id) {
+    res.status(201);
+    res.json({message: 'New cat added.', result});
+  } else {
+    res.sendStatus(400);
+  }
+};
+
+const putCat = (req, res) => {
+  // not implemented in this example, this is future homework
+  //res.sendStatus(200);
+  res.json({ message: 'Cat item updated.' });
+};
+
+const deleteCat = (req, res) => {
+  // not implemented in this example, this is future homework
+  //res.sendStatus(200);
+  res.json({ message: 'Cat item deleted.' });
+};
+
+export {getCat, getCatById, postCat, putCat, deleteCat};
