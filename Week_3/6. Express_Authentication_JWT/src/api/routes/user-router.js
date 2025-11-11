@@ -21,14 +21,16 @@ const userRouter = express.Router();
 //userRouter.route('/:id').get(getUserById).put(putUser).delete(deleteUser);
 
 
-// GET user info (optional)
+// GET user info - Anyone can do this
+userRouter.get('/', getUser);
+
 userRouter.get('/:id', authenticateToken, getUserById);
 
 userRouter.get('/:id', authenticateToken, authorizeUserUpdate, getUser);
 
-// Post - modify this in case you need to add another account
-//userRouter.post('/:id', authenticateToken, authorizeUserUpdate, postUser);
-userRouter.post('/', postUser);
+// Post - Use the lower add another account and theres no admin.
+userRouter.post('/:id', authenticateToken, authorizeUserUpdate, postUser);
+//userRouter.post('/', postUser);
 
 // PUT user info
 userRouter.put('/:id', authenticateToken, authorizeUserUpdate, putUser);
