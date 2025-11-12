@@ -5,7 +5,6 @@
     
  const postLogin = async (req, res) => {
 
-    console.log("test: ", req.body.password)
    console.log('postLogin', req.body);
    const user = await findUserByUsername(req.body.username);
    if (!user) {
