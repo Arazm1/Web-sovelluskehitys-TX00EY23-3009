@@ -36,13 +36,32 @@ function App() {
 export default App
 */
 
-
 import './App.css';
+
+
+
+import Home from './components/Home';
+
 const App = () => {
+
+  const sitename = 'WSK';
+
+  const style = {
+    backgroundColor: 'gray',
+    color: 'white',
+  }
+
   return (
     <>
-      <h1>My App</h1>
+      <h1 style={style}>My App - {sitename}</h1>
+      <div style={{color: 'red'}}>MoiMoi</div>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
     </>
   );
 };
+
 export default App;
