@@ -1,6 +1,11 @@
-import MediaRow from "./MediaRow";
+import MediaRow from './MediaRow';
+import SingleView from './SingleView';
+
+import {useState} from 'react';
 
 const Home = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const mediaArray = [
     {
       media_id: 8,
@@ -37,42 +42,36 @@ const Home = () => {
       created_at: '2024-01-07T20:48:13.000Z',
     },
   ];
-
-  /*
   return (
+
+
+
+    
     <>
       <h2>My Media</h2>
+      <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
+
+      <table>
+        <thead>
+          <tr>
+            <th>Thumbnail</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Size</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {mediaArray.map((item) => (
+            <MediaRow key={item.media_id} 
+                      item={item}
+                      setSelectedItem={setSelectedItem} />
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
-*/
-
-  
-
-   return (
-     <>
-       <h2>My Media</h2>
-       <table>
-         <thead>
-           <tr>
-             <th>Thumbnail</th>
-             <th>Title</th>
-             <th>Description</th>
-             <th>Created</th>
-             <th>Size</th>
-             <th>Type</th>
-           </tr>
-         </thead>
-         <tbody>
-           {mediaArray.map((item) => (
-            <MediaRow key={item.media_id} item={item} />
-
-           ))}
-         </tbody>
-       </table>
-     </>
-   );
- };
-
 
 export default Home;
