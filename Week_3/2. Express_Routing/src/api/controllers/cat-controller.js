@@ -9,7 +9,9 @@ const getCatById = (req, res) => {
   if (cat) {
     res.json(cat);
   } else {
-    res.sendStatus(404);
+    //res.json('This wont work Ig, kinda does.. Actually it gives 200, so no')
+    //res.sendStatus(404);
+    res.status(404).json({ message: 'The cat was not found.. sad'})
   }
 };
 

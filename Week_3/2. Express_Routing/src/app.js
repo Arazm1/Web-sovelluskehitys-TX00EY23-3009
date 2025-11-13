@@ -19,6 +19,10 @@ app.get('/api/test', (request, response) => {
   response.send(responseData);
 });
 
+app.get('/api/test2', (req, res) => {
+  res.send({response: 'Wörking'});
+});
+
 
 app.use('/api/v1/cat', catRoutes);
 app.use('/api/v1/user', userRoutes);
