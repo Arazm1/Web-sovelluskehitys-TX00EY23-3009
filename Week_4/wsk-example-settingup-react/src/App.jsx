@@ -37,33 +37,28 @@ export default App
 */
 
 import './App.css';
-
-
-
-import Home from './components/Home';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import Layout from './components/Layout.jsx';
+import Home from './views/Home';
+import Profile from './views/Profile';
+import Upload from './views/Upload';
+import Single from './views/Single';
 
 const App = () => {
-
-  const sitename = 'WSK';
-
-  const style = {
-    backgroundColor: 'gray',
-    color: 'white',
-  }
-
   return (
-    <>
-      <h1 style={style}>My App - {sitename}</h1>
-      <div style={{color: 'red'}}>MoiMoi</div>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-      </ul>
+     <BrowserRouter>
+       <Routes>
+         <Route element={<Layout />}>
+           <Route path="/" element={<Home />} />
+           <Route path="/profile" element={<Profile />} />
+           <Route path="/upload" element={<Upload />} />
+           <Route path="/single" element={<Single />} />
 
-      <Home />
-    </>
-  );
+         </Route>
+       </Routes>
+     </BrowserRouter>
+   );
+    
 };
 
 export default App;
