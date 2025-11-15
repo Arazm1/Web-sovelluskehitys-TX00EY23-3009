@@ -72,4 +72,16 @@ const Home = () => {
   );
 };
 
+
 export default Home;
+
+/*
+export default Home({
+  build: {
+    rollupOptions: {
+      // https://rollupjs.org/configuration-options/
+    },
+  },
+});*/
+
+

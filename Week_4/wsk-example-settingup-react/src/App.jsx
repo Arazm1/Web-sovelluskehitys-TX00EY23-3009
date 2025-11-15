@@ -46,14 +46,13 @@ import Single from './views/Single';
 
 const App = () => {
   return (
-     <BrowserRouter>
+     <BrowserRouter basename={import.meta.env.BASE_URL}>
        <Routes>
          <Route element={<Layout />}>
            <Route path="/" element={<Home />} />
            <Route path="/profile" element={<Profile />} />
            <Route path="/upload" element={<Upload />} />
            <Route path="/single" element={<Single />} />
-
          </Route>
        </Routes>
      </BrowserRouter>
