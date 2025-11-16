@@ -27,6 +27,7 @@ const SingleView = (props) => {
         <div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
+            <p>{item.username}</p>
             <button style={stylebtn} onClick={() => setSelectedItem(null)}>Close</button>
 
             {item.media_type.startsWith('image') ? 

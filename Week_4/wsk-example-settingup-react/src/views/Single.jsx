@@ -19,6 +19,7 @@ const Single = () =>{
         <div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
+            <p>{item.username}</p>
 
             {item.media_type.startsWith('image') ? 
             (
