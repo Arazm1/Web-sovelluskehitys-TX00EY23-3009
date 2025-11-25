@@ -1,9 +1,6 @@
 // TODO: add necessary imports
 import { useState, useEffect } from 'react';
-const useMedia = () => {
 
-
-const [mediaArray, setMediaArray] = useState([]);
 
 const fetchData = async ( url, options = {}) => {
   // console.log('fetching data from url: ', url);
@@ -18,6 +15,13 @@ const fetchData = async ( url, options = {}) => {
   }
   return json;
 };
+
+
+
+const useMedia = () => {
+
+
+const [mediaArray, setMediaArray] = useState([]);
 
 
 const getMedia = async () => {
@@ -55,5 +59,78 @@ const getMedia = async () => {
  
 return {mediaArray};
 };
+
+
+
+
+
+const useAuthentication = () => {
+
+   const postLogin = async (inputs) => {
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputs),
+    };
+    const loginResult = await fetchData(import.meta.env.VITE_AUTH_API + '/auth/login', fetchOptions);
+    return loginResult;
+  };
+
+
+
+  return { postLogin }
+
+
+}
+
+
+const useUser = () => {
+
+  const getUserByToken = async (token) =>{
+    try{
+      const fetchOptions = {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      };
+
+      const useUserResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users/token', fetchOptions);
+      return useUserResult;
+    }
+    catch(error){
+      console.log('Error in useUser', error);
+    }
+  };
+
+
+  const postUser = async (inputs) =>{
+    try{
+      const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputs),
+    };
+    const registerResult = await fetchData(import.meta.env.VITE_AUTH_API + '/users', fetchOptions);
+    return registerResult;
+
+
+
+    }catch(error){
+      console.log('Error in postUser', error);
+    }
+    
+    }
+
+
+  return { getUserByToken, postUser }
+}
+
+
+
    
-export {useMedia};
+export {useMedia, useAuthentication, useUser};
