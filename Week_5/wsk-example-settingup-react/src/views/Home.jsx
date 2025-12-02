@@ -10,8 +10,7 @@ const Home = () => {
      null,
  );
     
-     const {mediaArray} = useMedia();
-    
+     const {mediaArray, deleteMedia, modifyMedia} = useMedia();    
      return (
          <>
              <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
@@ -22,6 +21,8 @@ const Home = () => {
                              key={mediaItem.media_id}
                              item={mediaItem}
                              setSelectedItem={setSelectedItem}
+                             deleteMedia={deleteMedia}
+                             modifyMedia={modifyMedia}
                          />
                      ))}
                  </tbody>

@@ -1,9 +1,59 @@
 // src/components/MediaRow.jsx
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { useUserContext } from '../hooks/contextHooks';
+import { useMedia } from '../hooks/apiHooks';
 
 
-const MediaRow = ({ item }) => {
+const MediaRow = ({ item, deleteMedia, modifyMedia }) => {
+
+  const token = localStorage.getItem('token');
+
+  const [showEdit, setShowEdit] = useState(false);
+
+  const {user} = useUserContext();
+  const navigate = useNavigate();
+
+
+  const isLoggedIn = !!user;
+  const isOwner = isLoggedIn && user.user_id === item.user_id;
+  const isAdmin = isLoggedIn && user.level_name === 'Admin';
+  const canEdit = isOwner || isAdmin;
+
+
+  const handleDelete = async () => {
+    try{
+      console.log('Deleting item!');
+      
+      await deleteMedia(item.media_id, token);
+      
+      //navigate(location.pathname);
+    }
+    catch(error){
+      console.log('handleDelete failed: ', error);
+    }
+  }
+
+  const handleModify = async () => {
+    try{
+      console.log('Opening Modify modal');
+      setShowEdit(true);
+      /*
+      const updatedMediaData = {
+        title: 'Updated title 1',
+        description: 'Updated description 1',
+      };
+
+      await modifyMedia(token, item.media_id, updatedMediaData);
+      navigate(location.pathname);
+      */
+    }
+    catch(error){
+      console.log('handleModify failed', error);
+    }
+  }
+
   //const {item} = props;
   return (
     // TODO: move <tr> element in foreach from Home.jsx here
@@ -22,6 +72,31 @@ const MediaRow = ({ item }) => {
       <td>
         <Link to='/single' state={{ item }}>Open</Link>
       </td>
+
+      <td>
+        {canEdit && (
+          <>
+            <div
+              className="bg-amber-500 cursor-pointer mx-auto text-amber-50 rounded-2xl  hover:bg-amber-950 text-center m-2"
+              onClick={handleModify}
+            >
+              Modify
+            </div>
+            <button onClick={handleDelete}>Delete</button>
+            {showEdit && (
+              <EditDialog
+                item={item}
+                modifyMedia={modifyMedia}
+                onClose={() => setShowEdit(false)}
+              />
+            )}
+          </>
+        )}
+      </td>
+      
+
+
+      
 
     </tr>
   );
