@@ -20,9 +20,10 @@ const Home = () => {
                          <MediaRow
                              key={mediaItem.media_id}
                              item={mediaItem}
-                             setSelectedItem={setSelectedItem}
                              deleteMedia={deleteMedia}
                              modifyMedia={modifyMedia}
+                             setSelectedItem={setSelectedItem}
+                             
                          />
                      ))}
                  </tbody>

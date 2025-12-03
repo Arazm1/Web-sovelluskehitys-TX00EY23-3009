@@ -8,7 +8,7 @@ import Profile from './views/Profile';
 import Upload from './views/Upload';
 import Single from './views/Single';
 import Login from './views/Login.jsx';
-import {UserProvider} from './contexts/UserContext';
+import {UserProvider} from './contexts/UserContext.jsx';
 import Logout from './views/Logout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 //import Register from './views/Register.jsx';

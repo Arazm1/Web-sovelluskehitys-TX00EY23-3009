@@ -20,6 +20,7 @@ const useMedia = () => {
 
         const newArray = await Promise.all(
           mediaData.map(async (item) => {
+            //console.log(item);
             const user = await fetchData(`${AUTH_API}/users/${item.user_id}`);
             // yhdistäkään user mediaData itemiin
             return {...item, username: user.username};

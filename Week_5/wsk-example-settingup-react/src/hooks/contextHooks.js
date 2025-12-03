@@ -10,6 +10,7 @@ const useUserContext = () => {
         throw new Error('useUserContext must be used within an UserProvider');
     }
     
+    //console.log('Context: ', context);
     return context;
 };
     

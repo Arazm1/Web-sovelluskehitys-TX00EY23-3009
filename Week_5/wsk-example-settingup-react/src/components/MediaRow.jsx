@@ -8,17 +8,22 @@ import { useMedia } from '../hooks/apiHooks';
 
 const MediaRow = ({ item, deleteMedia, modifyMedia }) => {
 
+  
   const token = localStorage.getItem('token');
 
   const [showEdit, setShowEdit] = useState(false);
 
-  const {user} = useUserContext();
+  const {user: contextUser} = useUserContext();
+  const currentUser = contextUser?.user;
   const navigate = useNavigate();
 
+  //console.log("User from context:", currentUser);
+  //console.log("Item:", item);
 
-  const isLoggedIn = !!user;
-  const isOwner = isLoggedIn && user.user_id === item.user_id;
-  const isAdmin = isLoggedIn && user.level_name === 'Admin';
+
+  const isLoggedIn = !! currentUser;
+  const isOwner = isLoggedIn && Number(currentUser.user_id) === Number(item.user_id);
+  const isAdmin = isLoggedIn && currentUser.level_name == 'Admin';
   const canEdit = isOwner || isAdmin;
 
 
@@ -72,12 +77,11 @@ const MediaRow = ({ item, deleteMedia, modifyMedia }) => {
       <td>
         <Link to='/single' state={{ item }}>Open</Link>
       </td>
-
       <td>
         {canEdit && (
-          <>
+          <div>
             <div
-              className="bg-amber-500 cursor-pointer mx-auto text-amber-50 rounded-2xl  hover:bg-amber-950 text-center m-2"
+              className="bg-amber-500 text-amber-50 rounded-2xl hover:bg-amber-950 px-2 py-1"
               onClick={handleModify}
             >
               Modify
@@ -90,14 +94,9 @@ const MediaRow = ({ item, deleteMedia, modifyMedia }) => {
                 onClose={() => setShowEdit(false)}
               />
             )}
-          </>
+            </div>
         )}
       </td>
-      
-
-
-      
-
     </tr>
   );
 };
