@@ -52,6 +52,30 @@ const useMedia = () => {
     return mediaResponse;
   };
 
+
+  const modifyMedia = async (id, updates, token) => {
+    const fetchOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(updates),
+    };
+
+    const response = await fetchData(MEDIA_API + '/media/' + id, fetchOptions);
+
+    setMediaArray((prev) =>
+      prev.map((item) =>
+        item.media_id === id ? { ...item, ...updates } : item
+      )
+    );
+    return response;
+
+
+  }
+
+
   // TÄHÄN DELETE MEDIA FUNKTIO
 
   const deleteMedia = async (id, token) => {
@@ -70,7 +94,7 @@ const useMedia = () => {
     return deleteResponse;
   };
 
-  return {mediaArray, postMedia, deleteMedia};
+  return {mediaArray, postMedia, modifyMedia, deleteMedia};
 };
 
 const useAuthentication = () => {

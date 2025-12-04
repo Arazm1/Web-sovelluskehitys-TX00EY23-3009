@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useUserContext } from '../hooks/contextHooks';
 import { useMedia } from '../hooks/apiHooks';
+import EditDialog from './EditDialog';
 
 
 const MediaRow = ({ item, deleteMedia, modifyMedia }) => {
